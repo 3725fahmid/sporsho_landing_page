@@ -1,10 +1,41 @@
-# Nuxt Minimal Starter
+# 📄 Nuxt PDF Reader
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modern, high-performance Web PDF Reader built with **Nuxt 3**, **Vue 3**, and **Tailwind CSS**. Designed for seamless document viewing, text search, annotations, and lightweight digital reading directly in the browser.
 
-## Setup
+---
 
-Make sure to install dependencies:
+## ✨ Features
+
+- ⚡ **Fast & Smooth Rendering** – Crisp PDF rendering powered by PDF.js and Web Workers.
+- 🎨 **Theme & Dark Mode Support** – Automatic system dark mode detection and customizable reader palettes.
+- 📑 **Outline & Thumbnails** – Interactive sidebar with visual page thumbnails and document table of contents.
+- 🔍 **Full-Text Search** – Fast keyword search with live highlight navigation across pages.
+- ✏️ **Annotations & Highlighting** – Text selection, custom highlights, sticky notes, and drawing tools.
+- 📱 **Responsive & Touch Friendly** – Pinch-to-zoom and fluid layouts optimized for mobile, tablet, and desktop.
+- ⌨️ **Keyboard Shortcuts** – Essential hotkeys for effortless document navigation.
+- 🔒 **Privacy First** – Pure client-side viewing ensures your files remain on your local machine.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Nuxt 3](https://nuxt.com/) (Vue 3, Vite)
+- **PDF Engine:** [PDF.js](https://mozilla.github.io/pdf.js/) / Vue PDF Component
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Icons:** Lucide Icons / Nuxt Icon
+- **State Management:** [Pinia](https://pinia.vuejs.org/)
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+Ensure you have **Node.js 18.x** or higher installed on your machine.
+
+### 1. Installation
+
+Install project dependencies using your package manager of choice:
 
 ```bash
 # npm
