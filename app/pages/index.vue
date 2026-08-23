@@ -1,7 +1,32 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 
 const showAllFeatures = ref(false)
+
+// Function to handle WOW initialization safely on the client side
+onMounted(async () => {
+  if (import.meta.client) {
+    const { default: WOW } = await import('wow.js')
+    const wow = new WOW({
+      boxClass: 'wow', // Animated element class (default: wow)
+      animateClass: 'animate__animated', // Animate.css prefix class
+      offset: 100, // Distance to element when triggering (default: 0)
+      mobile: true, // Trigger animations on mobile devices (default: true)
+      live: true // Act on asynchronously loaded content (default: true)
+    })
+    wow.init()
+  }
+})
+
+// Toggle handler that syncs WOW with dynamically displayed elements
+const toggleFeatures = async () => {
+  showAllFeatures.value = !showAllFeatures.value
+  await nextTick()
+  if (import.meta.client) {
+    const { default: WOW } = await import('wow.js')
+    new WOW({ animateClass: 'animate__animated', live: true }).init()
+  }
+}
 
 const features = [
   {
@@ -57,7 +82,7 @@ const plans = [
     <!-- HERO SECTION -->
     <section
       class="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div class="space-y-6 text-center lg:text-left">
+      <div class="wow animate__animated animate__fadeInLeft space-y-6 text-center lg:text-left">
         <div
           class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-slate-950/20 dark:border-white/20 bg-paper-light-badge dark:bg-paper-dark-badge text-xs font-bold text-slate-900 dark:text-amber-300 shadow-xs">
           <span>📄 Next-Gen PDF Experience</span>
@@ -84,7 +109,7 @@ const plans = [
       </div>
 
       <!-- Hero Visual -->
-      <div class="relative flex justify-center">
+      <div class="wow animate__animated animate__fadeInRight relative flex justify-center">
         <div
           class="w-full max-w-md p-6 rounded-[2.5rem] border-2 border-slate-950/20 dark:border-white/20 bg-paper-light-card dark:bg-paper-dark-card shadow-2xl hover:scale-105 transition-transform duration-300">
           <div
@@ -112,7 +137,7 @@ const plans = [
 
     <!-- AMAZING FEATURES SECTION -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <div class="wow animate__animated animate__fadeInUp text-center max-w-3xl mx-auto mb-16 space-y-3">
         <h2 class="text-3xl sm:text-5xl font-serif font-bold text-slate-950 dark:text-amber-50">
           Amazing Features
         </h2>
@@ -124,7 +149,8 @@ const plans = [
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
         <template v-for="(item, index) in features" :key="index">
           <div v-if="index < 3 || showAllFeatures"
-            class="group relative p-8 rounded-[2rem] border-2 border-slate-950/15 dark:border-white/15 bg-paper-light-card dark:bg-paper-dark-card shadow-md hover:shadow-2xl hover:scale-105 hover:z-30 transition-all duration-300 flex flex-col justify-between">
+            class="wow animate__animated animate__fadeInUp group relative p-8 rounded-[2rem] border-2 border-slate-950/15 dark:border-white/15 bg-paper-light-card dark:bg-paper-dark-card shadow-md hover:shadow-2xl hover:scale-105 hover:z-30 transition-all duration-300 flex flex-col justify-between"
+            :data-wow-delay="`${(index % 3) * 0.2}s`">
             <div>
               <div
                 class="size-14 rounded-full border border-slate-950/20 dark:border-white/20 bg-paper-light-badge dark:bg-paper-dark-icon text-slate-950 dark:text-amber-300 flex items-center justify-center mb-6 shadow-xs">
@@ -144,7 +170,7 @@ const plans = [
       </div>
 
       <div class="mt-16 text-center">
-        <button @click="showAllFeatures = !showAllFeatures" type="button"
+        <button @click="toggleFeatures" type="button"
           class="inline-flex items-center justify-center gap-x-2 rounded-2xl border-2 border-slate-950/30 dark:border-amber-300/40 bg-paper-light-card dark:bg-paper-dark-badge px-10 py-3.5 text-sm font-bold text-slate-950 dark:text-amber-200 shadow-md transition-all duration-200 hover:bg-slate-200 dark:hover:bg-paper-dark-icon hover:scale-105 cursor-pointer">
           <span>{{ showAllFeatures ? 'Show Less' : 'Learn More' }}</span>
           <svg class="size-4 transition-transform duration-200" :class="showAllFeatures ? 'rotate-180' : ''" fill="none"
@@ -157,7 +183,7 @@ const plans = [
 
     <!-- WHY CHOOSE SECTION -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <div class="wow animate__animated animate__fadeIn text-center max-w-3xl mx-auto mb-16 space-y-3">
         <h2 class="text-3xl sm:text-5xl font-serif font-bold text-slate-950 dark:text-amber-50">
           Why Choose IC Sporo?
         </h2>
@@ -167,7 +193,8 @@ const plans = [
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div v-for="(vp, idx) in valueProps" :key="idx"
-          class="p-6 rounded-[2rem] border border-slate-950/15 dark:border-white/15 bg-paper-light-card dark:bg-paper-dark-card text-center space-y-3 hover:scale-105 transition-transform shadow-xs">
+          class="wow animate__animated animate__zoomIn p-6 rounded-[2rem] border border-slate-950/15 dark:border-white/15 bg-paper-light-card dark:bg-paper-dark-card text-center space-y-3 hover:scale-105 transition-transform shadow-xs"
+          :data-wow-delay="`${idx * 0.15}s`">
           <div
             class="size-12 mx-auto rounded-full bg-paper-light-badge dark:bg-paper-dark-icon text-slate-950 dark:text-amber-300 flex items-center justify-center">
             <svg class="size-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -182,7 +209,7 @@ const plans = [
 
     <!-- PRICING SECTION -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <div class="wow animate__animated animate__fadeInUp text-center max-w-3xl mx-auto mb-16 space-y-3">
         <h2 class="text-3xl sm:text-5xl font-serif font-bold text-slate-950 dark:text-amber-50">
           Simple & Affordable Pricing
         </h2>
@@ -193,12 +220,14 @@ const plans = [
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
         <div v-for="(plan, idx) in plans" :key="idx"
+          class="wow animate__animated animate__fadeInUp p-8 rounded-[2rem] bg-paper-light-card dark:bg-paper-dark-card flex flex-col justify-between shadow-lg hover:scale-105 transition-transform"
           :class="plan.highlight ? 'border-amber-600 dark:border-amber-400 border-4 scale-105' : 'border-2 border-slate-950/15 dark:border-white/15'"
-          class="p-8 rounded-[2rem] bg-paper-light-card dark:bg-paper-dark-card flex flex-col justify-between shadow-lg hover:scale-105 transition-transform">
+          :data-wow-delay="`${idx * 0.2}s`">
           <div class="space-y-4">
             <h3 class="text-2xl font-serif font-bold text-slate-950 dark:text-amber-50">{{ plan.name }}</h3>
-            <div class="text-4xl font-serif font-bold text-paper-accent dark:text-paper-accent-dark">{{ plan.price
-              }}<span class="text-xs font-sans text-slate-700 dark:text-slate-300">/month</span></div>
+            <div class="text-4xl font-serif font-bold text-paper-accent dark:text-paper-accent-dark">
+              {{ plan.price }}<span class="text-xs font-sans text-slate-700 dark:text-slate-300">/month</span>
+            </div>
             <p class="text-xs text-slate-800 dark:text-slate-200 font-sans">{{ plan.desc }}</p>
             <ul class="space-y-2 pt-4 border-t border-slate-950/10 dark:border-white/10 font-sans text-xs">
               <li v-for="(f, i) in plan.features" :key="i"
@@ -218,7 +247,7 @@ const plans = [
     <!-- FOOTER CALLOUT BANNER -->
     <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div
-        class="p-10 rounded-[2.5rem] bg-slate-950 dark:bg-paper-dark-card border-2 border-slate-950 dark:border-amber-300/30 text-center space-y-6 shadow-2xl">
+        class="wow animate__animated animate__zoomIn p-10 rounded-[2.5rem] bg-slate-950 dark:bg-paper-dark-card border-2 border-slate-950 dark:border-amber-300/30 text-center space-y-6 shadow-2xl">
         <h2 class="text-3xl sm:text-4xl font-serif font-bold text-amber-100">Ready to Upgrade Your PDF Workflow?</h2>
         <p class="text-sm text-slate-200 max-w-xl mx-auto font-sans">Get started with IC Sporo today and experience
           paper-like PDF reading with AI capabilities.</p>

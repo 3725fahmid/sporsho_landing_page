@@ -1,3 +1,19 @@
+<script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  if (import.meta.client && window.WOW) {
+    new window.WOW({
+      boxClass: 'wow',
+      animateClass: 'animate__animated',
+      offset: 50,
+      mobile: true,
+      live: true
+    }).init()
+  }
+})
+</script>
+
 <template>
   <div
     class="bg-paper-light dark:bg-paper-dark text-slate-950 dark:text-slate-50 transition-colors duration-300 min-h-screen py-16 px-6 lg:px-8">
@@ -5,7 +21,7 @@
     <div class="mx-auto max-w-6xl">
 
       <!-- HEADER TITLE -->
-      <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+      <div class="wow animate__animated animate__fadeInDown text-center max-w-2xl mx-auto mb-16 space-y-4">
         <div
           class="inline-flex items-center gap-x-2 rounded-full bg-paper-light-badge dark:bg-paper-dark-badge border border-slate-950/15 dark:border-white/15 px-4 py-1.5 text-xs font-bold text-slate-900 dark:text-amber-300 shadow-xs">
           <span class="inline-block size-2 rounded-full bg-amber-600 dark:bg-amber-400 animate-pulse"></span>
@@ -21,11 +37,12 @@
 
       <!-- MAIN CARD WRAPPER -->
       <div
-        class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch bg-paper-light-card dark:bg-paper-dark-card border-2 border-slate-950/15 dark:border-white/15 rounded-[2.5rem] p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+        class="wow animate__animated animate__fadeInUp grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch bg-paper-light-card dark:bg-paper-dark-card border-2 border-slate-950/15 dark:border-white/15 rounded-[2.5rem] p-6 sm:p-10 shadow-2xl backdrop-blur-md">
 
         <!-- LEFT INFO PANEL -->
         <div
-          class="lg:col-span-5 flex flex-col justify-between rounded-[2rem] bg-paper-light dark:bg-paper-dark-preview border border-slate-950/10 dark:border-white/10 p-8">
+          class="wow animate__animated animate__fadeInLeft lg:col-span-5 flex flex-col justify-between rounded-[2rem] bg-paper-light dark:bg-paper-dark-preview border border-slate-950/10 dark:border-white/10 p-8"
+          data-wow-delay="0.2s">
           <div>
             <h2 class="text-2xl font-serif font-bold text-slate-950 dark:text-amber-50">
               Access your papers with Sporo AI
@@ -61,7 +78,8 @@
         </div>
 
         <!-- RIGHT FORM PANEL -->
-        <div class="lg:col-span-7 flex flex-col justify-center lg:pl-4">
+        <div class="wow animate__animated animate__fadeInRight lg:col-span-7 flex flex-col justify-center lg:pl-4"
+          data-wow-delay="0.3s">
           <form action="#" method="POST" class="space-y-6">
 
             <div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
