@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* High-Contrast Warm Paper Palette */
+    --color-paper-light: #faf6ed;
+    --color-paper-light-card: #ffffff;
+    --color-paper-light-badge: #f3e3a9;
+
+    --color-paper-dark: #080f0b;
+    --color-paper-dark-card: #121e18;
+    --color-paper-dark-badge: #1a2a22;
+    --color-paper-dark-icon: #23382d;
+    --color-paper-dark-preview: #15241c;
+
+    /* High-Contrast Accents */
+    --color-paper-accent: #92400e;
+    /* Dark warm amber for light mode */
+    --color-paper-accent-dark: #fbbf24;
+    /* Vivid gold for dark mode */
+}
+
+@layer base {
+    html {
+        @apply bg-paper-light text-slate-950 transition-colors duration-300;
+    }
+
+    html.dark {
+        @apply bg-paper-dark text-slate-50;
+    }
+}
