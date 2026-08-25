@@ -33,7 +33,7 @@
           active-class="!bg-paper-light-badge dark:!bg-paper-dark-badge !text-slate-950 dark:!text-amber-300 font-bold">
           Home
         </NuxtLink>
-        <NuxtLink to="/about"
+        <NuxtLink to="/features"
           class="rounded-full px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-amber-50 hover:bg-slate-950/5 dark:hover:bg-white/10 transition-all duration-200"
           active-class="!bg-paper-light-badge dark:!bg-paper-dark-badge !text-slate-950 dark:!text-amber-300 font-bold">
           Features
@@ -104,7 +104,7 @@
             class="block rounded-xl px-3 py-2.5 text-base font-semibold text-slate-900 dark:text-slate-100 hover:bg-slate-950/5 dark:hover:bg-white/10">
             Home
           </NuxtLink>
-          <NuxtLink to="/about" @click="isOpen = false"
+          <NuxtLink to="/features" @click="isOpen = false"
             class="block rounded-xl px-3 py-2.5 text-base font-semibold text-slate-900 dark:text-slate-100 hover:bg-slate-950/5 dark:hover:bg-white/10">
             Features
           </NuxtLink>
